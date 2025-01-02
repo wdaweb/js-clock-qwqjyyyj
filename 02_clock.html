@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>這是一個時鐘</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #bgChange {
+        width: 100vw;
+        height: 100vh;
+        background: url(./image/pexels-caio-59591.jpg);
+      }
+
+      #roof {
+        width: 0px;
+        height: 0px;
+        border-left: 185px solid transparent;
+        border-right: 185px solid transparent;
+        border-bottom: 160px solid rgb(131, 112, 93);
+        margin: auto;
+        position: relative;
+        top: 30px;
+      }
+
+      #house {
+        width: 320px;
+        height: 320px;
+        background: rgb(146, 126, 104);
+        margin: auto;
+        position: relative;
+        top: 30px;
+      }
+
+      #door {
+        width: 130px;
+        height: 55px;
+        background: rgb(109, 77, 41);
+        position: absolute;
+        left: calc(160px - 75px);
+        top: 20px;
+        border: 10px solid rgb(124, 98, 68);
+        border-radius: 5px;
+      }
+
+      #bird {
+        display: none;
+        width: 451px;
+        height: auto;
+        position: absolute;
+        bottom: -115px;
+        left: -123px;
+        z-index: 10;
+      }
+
+      #clock {
+        width: 200px;
+        height: 200px;
+        background: rgba(54, 34, 11, 0.7);
+        border-radius: 50%;
+        margin: auto;
+        position: relative;
+        top: 112px;
+      }
+
+      #clock:hover {
+        background: rgba(54, 34, 11, 1);
+      }
+
+      #hour {
+        width: 25%;
+        height: 14px;
+        background: rgba(241, 124, 94, 0.7);
+        border-radius: 5px;
+        position: absolute;
+        left: 25%;
+        top: calc(50% - 7px);
+        transform-origin: right center;
+      }
+
+      #hour:hover {
+        background: rgba(241, 124, 94, 1);
+        z-index: 11;
+      }
+
+      #minute {
+        width: 40%;
+        height: 8px;
+        background: rgba(245, 167, 116, 0.7);
+        border-radius: 5px;
+        position: absolute;
+        left: 10%;
+        top: calc(50% - 4px);
+        transform-origin: right center;
+      }
+
+      #minute:hover {
+        background: rgba(245, 167, 116, 1);
+        z-index: 11;
+      }
+
+      #second {
+        width: 45%;
+        height: 6px;
+        background: rgba(255, 222, 199, 0.7);
+        border-radius: 5px;
+        position: absolute;
+        left: 5%;
+        top: calc(50% - 3px);
+        transform-origin: right center;
+      }
+
+      #second:hover {
+        background: rgba(255, 222, 199, 1);
+        z-index: 11;
+      }
+
+      #nowbox {
+        width: 250px;
+        height: 200px;
+        border: 10px dashed rgb(252, 164, 50);
+        border-radius: 10px;
+        background: rgba(252, 164, 50, 0.6);
+        position: absolute;
+        left: -120px;
+        top: 350px;
+        text-align: center;
+        font-size: 20px;
+        line-height: 45px;
+      }
+
+      #nowbox:hover {
+        background: rgba(252, 164, 50, 1);
+      }
+
+      #utcbox {
+        width: 250px;
+        height: 200px;
+        border: 10px dashed rgb(255, 187, 61);
+        border-radius: 10px;
+        background: rgba(255, 187, 61, 0.6);
+        position: absolute;
+        right: -120px;
+        top: 350px;
+        text-align: center;
+        text-align: center;
+        font-size: 20px;
+        line-height: 45px;
+      }
+
+      #utcbox:hover {
+        background: rgba(255, 187, 61, 1);
+      }
+
+      #text0 {
+        font-size: 26px;
+        font-weight: bolder;
+        margin-top: 30px;
+      }
+
+      #textNST,
+      #textUTC {
+        font-weight: 800;
+        font-size: 26px;
+      }
+
+      #ps {
+        width: 280px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.3);
+        margin: auto;
+        position: relative;
+        top: 310px;
+        text-align: center;
+        font-size: 20px;
+        line-height: 50px;
+        border: 5px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+        color: rgb(63, 51, 51);
+      }
+
+      #ps:hover {
+        background: rgba(255, 255, 255, 0.7);
+        border: 5px dashed rgba(255, 255, 255, 0);
+        color: rgb(0, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="bgChange">
+      <div id="roof"></div>
+      <div id="house">
+        <div id="door">
+          <div><img id="bird" src="./image/bird_kakkou.png" /></div>
+        </div>
+        <div id="clock">
+          <div id="hour"></div>
+          <div id="minute"></div>
+          <div id="second"></div>
+        </div>
+        <div id="nowbox">
+          <p id="text0">現在時間</p>
+          <p id="textDate">yyyy/mm/dd</p>
+          <p id="textNST">00:00:00.000</p>
+        </div>
+        <div id="utcbox">
+          <p id="text0">世界協調時間 UTC</p>
+          <p id="textDateUTC">yyyy/mm/dd</p>
+          <p id="textUTC">00:00:00</p>
+        </div>
+      </div>
+      <div id="ps">整點與30分畫面會提醒你ㄛ</div>
+    </div>
+    <script>
+      // 時鐘
+      const elHour = document.getElementById("hour");
+      const elMinute = document.getElementById("minute");
+      const elSecond = document.getElementById("second");
+      // 日期
+      const today = document.getElementById("textDate");
+      const todayUTC = document.getElementById("textDateUTC");
+      // 數位時間
+      const elTextNST = document.getElementById("textNST");
+      const elTextUTC = document.getElementById("textUTC");
+
+      // 現在時間
+      const clock = () => {
+        const date = new Date();
+        const yyyy = date.getFullYear();
+        const mm = date.getMonth() + 1;
+        const dd = date.getDate();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
+        const ms = date.getMilliseconds();
+
+        elHour.style.transform = `rotate(${h * 30 + 90}deg)`;
+        elMinute.style.transform = `rotate(${m * 6 + 90}deg)`;
+        elSecond.style.transform = `rotate(${s * 6 + 90}deg)`;
+
+        today.innerText = `西元 ${yyyy.toString().padStart(4, "0")} 年 ${mm
+          .toString()
+          .padStart(2, "0")} 月 ${dd.toString().padStart(2, "0")} 日`;
+
+        elTextNST.innerText = `${h.toString().padStart(2, "0")} : ${m
+          .toString()
+          .padStart(2, "0")} : ${s.toString().padStart(2, "0")} .${ms
+          .toString()
+          .padStart(3, "0")}`;
+      };
+
+      setInterval(clock, 1);
+      clock();
+
+      // 世界協調時間
+      const clockUTC = () => {
+        const dateUTC = new Date();
+        const yyyyUTC = dateUTC.getUTCFullYear();
+        const mmUTC = dateUTC.getUTCMonth() + 1;
+        const ddUTC = dateUTC.getUTCDate();
+        const hUTC = dateUTC.getUTCHours();
+        const mUTC = dateUTC.getUTCMinutes();
+        const sUTC = dateUTC.getUTCSeconds();
+        const msUTC = dateUTC.getMilliseconds();
+
+        todayUTC.innerText = `西元 ${yyyyUTC
+          .toString()
+          .padStart(4, "0")} 年 ${mmUTC.toString().padStart(2, "0")} 月 ${ddUTC
+          .toString()
+          .padStart(2, "0")} 日`;
+
+        elTextUTC.innerText = `${hUTC.toString().padStart(2, "0")} : ${mUTC
+          .toString()
+          .padStart(2, "0")} : ${sUTC.toString().padStart(2, "0")} .${msUTC
+          .toString()
+          .padStart(3, "0")}`;
+      };
+
+      setInterval(clockUTC, 1);
+      clockUTC();
+
+      const bgChange = document.getElementById("bgChange");
+      const cuckooBird = document.getElementById("bird");
+
+      // 整點前3秒的紅色警告
+      setInterval(() => {
+        const bgChangeMins = new Date().getMinutes();
+        const bgChangeSecs = new Date().getSeconds();
+        if (bgChangeMins === 59) {
+          if (bgChangeSecs === 57) {
+            bgChange.style.background = "rgba(255, 0, 0, 0.6)";
+          } else if (bgChangeSecs === 58) {
+            bgChange.style.background = "rgba(255, 0, 0, 0.7)";
+          } else if (bgChangeSecs === 59) {
+            bgChange.style.background = "rgba(255, 0, 0, 0.8)";
+          }
+        }
+
+        if (bgChangeMins === 0) {
+          if (bgChangeSecs === 0) {
+            bgChange.style.background = "rgba(255, 0, 0, 1)";
+          } else if (bgChangeSecs === 1) {
+            bgChange.style.background = "url(./image/pexels-caio-59591.jpg)";
+          }
+        }
+      }, 1);
+
+      // 30分的布穀鳥
+      setInterval(() => {
+        const bgChangeMins = new Date().getMinutes();
+        const bgChangeSecs = new Date().getSeconds();
+
+        if (bgChangeMins === 30) {
+          if (bgChangeSecs === 0) {
+            cuckooBird.style.display = "block";
+            setTimeout(() => {
+              cuckooBird.style.display = "none";
+            }, 5000);
+          }
+        }
+      }, 1);
+    </script>
+  </body>
+</html>
